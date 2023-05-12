@@ -193,6 +193,10 @@ const docTemplate = `{
                 "recipient_zip_code": {
                     "type": "string",
                     "example": "610061"
+                },
+                "send_date": {
+                    "type": "string",
+                    "example": "2023-05-10T12:00:00Z"
                 }
             }
         }

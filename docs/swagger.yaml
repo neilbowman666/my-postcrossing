@@ -116,6 +116,9 @@ definitions:
       recipient_zip_code:
         example: "610061"
         type: string
+      send_date:
+        example: "2023-05-10T12:00:00Z"
+        type: string
     type: object
 info:
   contact: {}

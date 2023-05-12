@@ -3,10 +3,13 @@ package m
 import (
 	"gorm.io/gorm"
 	"my-postcrossing/const"
+	"time"
 )
 
 type SentMail struct {
 	gorm.Model `json:"-"`
+
+	SendDate time.Time
 
 	MailType _const.MailType
 

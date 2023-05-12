@@ -3,9 +3,11 @@ package form
 import (
 	_const "my-postcrossing/const"
 	"my-postcrossing/m"
+	"time"
 )
 
 type SendMailForm struct {
+	SendDate             time.Time                 `json:"send_date" example:"2023-05-10T12:00:00Z"`
 	MailType             _const.MailType           `json:"mail_type" example:"plain mail"`
 	PostFee              float32                   `json:"post_fee" example:"1.2"`
 	PostFeePaymentType   _const.PostFeePaymentType `json:"post_fee_payment_type" example:"stamps"`
@@ -20,6 +22,7 @@ type SendMailForm struct {
 
 func (_this *SendMailForm) ToM() *m.SentMail {
 	return &m.SentMail{
+		SendDate:             _this.SendDate,
 		MailType:             _this.MailType,
 		PostFee:              _this.PostFee,
 		PostFeePaymentType:   _this.PostFeePaymentType,
