@@ -5,12 +5,12 @@ import "gorm.io/gorm"
 type SentMail struct {
 	gorm.Model `json:"-"`
 
-	MailType string
+	MailType MailType
 
 	PostFee            float32
-	PostFeePaymentType string
+	PostFeePaymentType PostFeePaymentType
 
-	PostRegion string
+	PostRegion PostRegion
 
 	RecipientType        string
 	RecipientName        string

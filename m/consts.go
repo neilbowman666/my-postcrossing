@@ -14,14 +14,22 @@ const (
 
 	MailTypePackage        MailType = "post package"         // 包裹：一般
 	MailTypeExpressPackage MailType = "post express package" // 包裹：快递
-	MailTypeLittlePackage  MailType = "post little package"  // 包裹：小包
+	MailTypeSmallPackage   MailType = "post small package"   // 包裹：小包
 )
 
-const PostFeePaymentTypeCash = "cash"     // 现金
-const PostFeePaymentTypeStamps = "stamps" // 邮票
+type PostFeePaymentType string
 
-const PostRegionDomesticLocal = "domestic local"                      // 国内本埠
-const PostRegionDomestic = "domestic"                                 // 国内外埠
-const PostRegionOverseasByAir = "overseas (by air)"                   // 跨洋航空
-const PostRegionOverseasSurface = "overseas (surface)"                // 跨洋水陆路
-const PostRegionOverseasByAirAndSurface = "overseas (by air surface)" // 跨洋航空水陆路
+const (
+	PostFeePaymentTypeCash   PostFeePaymentType = "cash"   // 现金
+	PostFeePaymentTypeStamps PostFeePaymentType = "stamps" // 邮票
+)
+
+type PostRegion string
+
+const (
+	PostRegionDomesticLocal           PostRegion = "domestic local"            // 国内本埠
+	PostRegionDomestic                PostRegion = "domestic"                  // 国内外埠
+	PostRegionOverseasByAir           PostRegion = "overseas (by air)"         // 跨洋航空
+	PostRegionOverseasSurface         PostRegion = "overseas (surface)"        // 跨洋水陆路
+	PostRegionOverseasByAirAndSurface PostRegion = "overseas (by air surface)" // 跨洋航空水陆路
+)
