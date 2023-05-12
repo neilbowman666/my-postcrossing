@@ -7,6 +7,7 @@ import (
 )
 
 var DBConn *gorm.DB
+var DefaultTx Transaction
 
 func InitDatabase() *gorm.DB {
 	// 连接数据库
@@ -16,9 +17,13 @@ func InitDatabase() *gorm.DB {
 			SingularTable: true, // 使用单数名称作为表名
 		},
 	})
-
 	if err != nil {
 		panic("Failed to connect database.")
+	}
+
+	// 配置默认连接
+	DefaultTx = Transaction{
+		Tx: DBConn,
 	}
 
 	return DBConn

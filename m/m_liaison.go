@@ -1,6 +1,9 @@
 package m
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"my-postcrossing/const"
+)
 
 type Liaison struct {
 	gorm.Model  `json:"-"`
@@ -9,4 +12,5 @@ type Liaison struct {
 	District    string
 	Address     string
 	PhoneNumber string
+	Type        _const.RecipientType
 }

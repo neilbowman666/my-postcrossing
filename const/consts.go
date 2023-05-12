@@ -1,4 +1,4 @@
-package m
+package _const
 
 type MailType string
 
@@ -32,4 +32,16 @@ const (
 	PostRegionOverseasByAir           PostRegion = "overseas (by air)"         // 跨洋航空
 	PostRegionOverseasSurface         PostRegion = "overseas (surface)"        // 跨洋水陆路
 	PostRegionOverseasByAirAndSurface PostRegion = "overseas (by air surface)" // 跨洋航空水陆路
+)
+
+type RecipientType string
+
+const (
+	RecipientTypeMySelf             RecipientType = "my self"
+	RecipientTypeCouple             RecipientType = "couple"
+	RecipientTypeRelative           RecipientType = "relative"
+	RecipientTypeFriend             RecipientType = "friend"
+	RecipientTypePenPal             RecipientType = "pen pal"
+	RecipientTypePostmarkCollecting RecipientType = "postmark collecting"
+	RecipientTypeOther              RecipientType = "other"
 )

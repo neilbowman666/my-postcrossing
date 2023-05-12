@@ -1,18 +1,21 @@
 package m
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"my-postcrossing/const"
+)
 
 type SentMail struct {
 	gorm.Model `json:"-"`
 
-	MailType MailType
+	MailType _const.MailType
 
 	PostFee            float32
-	PostFeePaymentType PostFeePaymentType
+	PostFeePaymentType _const.PostFeePaymentType
 
-	PostRegion PostRegion
+	PostRegion _const.PostRegion
 
-	RecipientType        string
+	RecipientType        _const.RecipientType
 	RecipientName        string
 	RecipientZipCode     string
 	RecipientDistrict    string
