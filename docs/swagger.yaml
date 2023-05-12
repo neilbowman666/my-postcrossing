@@ -1,0 +1,137 @@
+definitions:
+  _const.MailType:
+    enum:
+    - plain mail
+    - registered mail
+    - plain postcard
+    - registered postcard
+    - plain presswork
+    - registered presswork
+    - post package
+    - post express package
+    - post small package
+    type: string
+    x-enum-comments:
+      MailTypeExpressPackage: 包裹：快递
+      MailTypePackage: 包裹：一般
+      MailTypePlainMail: 信件：一般
+      MailTypePlainPostcard: 明信片：一般
+      MailTypePlainPresswork: 印刷品：一般
+      MailTypeRegisteredMail: 信件：挂号
+      MailTypeRegisteredPostcard: 明信片：挂号
+      MailTypeRegisteredPresswork: 印刷品：挂号
+      MailTypeSmallPackage: 包裹：小包
+    x-enum-varnames:
+    - MailTypePlainMail
+    - MailTypeRegisteredMail
+    - MailTypePlainPostcard
+    - MailTypeRegisteredPostcard
+    - MailTypePlainPresswork
+    - MailTypeRegisteredPresswork
+    - MailTypePackage
+    - MailTypeExpressPackage
+    - MailTypeSmallPackage
+  _const.PostFeePaymentType:
+    enum:
+    - cash
+    - stamps
+    type: string
+    x-enum-comments:
+      PostFeePaymentTypeCash: 现金
+      PostFeePaymentTypeStamps: 邮票
+    x-enum-varnames:
+    - PostFeePaymentTypeCash
+    - PostFeePaymentTypeStamps
+  _const.PostRegion:
+    enum:
+    - domestic local
+    - domestic
+    - overseas (by air)
+    - overseas (surface)
+    - overseas (by air surface)
+    type: string
+    x-enum-comments:
+      PostRegionDomestic: 国内外埠
+      PostRegionDomesticLocal: 国内本埠
+      PostRegionOverseasByAir: 跨洋航空
+      PostRegionOverseasByAirAndSurface: 跨洋航空水陆路
+      PostRegionOverseasSurface: 跨洋水陆路
+    x-enum-varnames:
+    - PostRegionDomesticLocal
+    - PostRegionDomestic
+    - PostRegionOverseasByAir
+    - PostRegionOverseasSurface
+    - PostRegionOverseasByAirAndSurface
+  _const.RecipientType:
+    enum:
+    - my self
+    - couple
+    - relative
+    - friend
+    - pen pal
+    - postmark collecting
+    - other
+    type: string
+    x-enum-varnames:
+    - RecipientTypeMySelf
+    - RecipientTypeCouple
+    - RecipientTypeRelative
+    - RecipientTypeFriend
+    - RecipientTypePenPal
+    - RecipientTypePostmarkCollecting
+    - RecipientTypeOther
+  form.SendMailForm:
+    properties:
+      mail_type:
+        allOf:
+        - $ref: '#/definitions/_const.MailType'
+        example: plain mail
+      post_fee:
+        example: 1.2
+        type: number
+      post_fee_payment_type:
+        allOf:
+        - $ref: '#/definitions/_const.PostFeePaymentType'
+        example: stamps
+      post_region:
+        allOf:
+        - $ref: '#/definitions/_const.PostRegion'
+        example: domestic local
+      recipient_address:
+        example: Caotanglu 1 Hao
+        type: string
+      recipient_district:
+        example: Sichaunsheng Chengdushi Qingyangqu
+        type: string
+      recipient_name:
+        example: Jimmy Carter
+        type: string
+      recipient_phone_number:
+        example: "13900000001"
+        type: string
+      recipient_type:
+        allOf:
+        - $ref: '#/definitions/_const.RecipientType'
+        example: friend
+      recipient_zip_code:
+        example: "610061"
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/sent-mails:
+    post:
+      description: send mail
+      parameters:
+      - description: send mail form
+        in: body
+        name: HTTP_POST_body
+        required: true
+        schema:
+          $ref: '#/definitions/form.SendMailForm'
+      responses: {}
+      summary: Send mail
+      tags:
+      - sent-mail
+swagger: "2.0"
