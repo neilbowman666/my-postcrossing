@@ -14,6 +14,7 @@ type SentMail struct {
 
 	RecipientType        string
 	RecipientName        string
+	RecipientZipCode     string
 	RecipientDistrict    string
 	RecipientAddress     string
 	RecipientPhoneNumber string
