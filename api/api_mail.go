@@ -12,7 +12,7 @@ import (
 // SendMail
 // @Summary Send mail
 // @Description send mail
-// @Tags sent-mail
+// @Tags mail
 // @Param HTTP_POST_body body form.SendMailForm true "send mail form"
 // @Success 201 {object} resp.Pack[resp.None]
 // @Router /api/v1/sent-mails [POST]
@@ -31,7 +31,7 @@ func SendMail(c *gin.Context) {
 // ListSentMails
 // @Summary List Sent Mails
 // @Description List sent mails
-// @Tags sent-mail
+// @Tags mail
 // @Param page query int true "page number, start from 1."
 // @Param page_size query int true "page size"
 // @Success 200 {object} resp.Pack[resp.PagingPack[m.SentMailVo]]
@@ -54,7 +54,7 @@ func ListSentMails(c *gin.Context) {
 // DeleteSentMails
 // @Summary Delete Sent Mails
 // @Description Delete sent mails
-// @Tags sent-mail
+// @Tags mail
 // @Param id path int true "sent mail ID"
 // @Success 200 {object} resp.Pack[resp.None]
 // @Router /api/v1/sent-mails/{id} [DELETE]

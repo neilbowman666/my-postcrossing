@@ -236,7 +236,7 @@ paths:
             $ref: '#/definitions/resp.Pack-resp_PagingPack-m_SentMailVo'
       summary: List Sent Mails
       tags:
-      - sent-mail
+      - mail
     post:
       description: send mail
       parameters:
@@ -253,7 +253,7 @@ paths:
             $ref: '#/definitions/resp.Pack-resp_None'
       summary: Send mail
       tags:
-      - sent-mail
+      - mail
   /api/v1/sent-mails/{id}:
     delete:
       description: Delete sent mails
@@ -270,5 +270,5 @@ paths:
             $ref: '#/definitions/resp.Pack-resp_None'
       summary: Delete Sent Mails
       tags:
-      - sent-mail
+      - mail
 swagger: "2.0"

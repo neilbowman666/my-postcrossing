@@ -20,7 +20,7 @@ const docTemplate = `{
             "get": {
                 "description": "List sent mails",
                 "tags": [
-                    "sent-mail"
+                    "mail"
                 ],
                 "summary": "List Sent Mails",
                 "parameters": [
@@ -51,7 +51,7 @@ const docTemplate = `{
             "post": {
                 "description": "send mail",
                 "tags": [
-                    "sent-mail"
+                    "mail"
                 ],
                 "summary": "Send mail",
                 "parameters": [
@@ -79,7 +79,7 @@ const docTemplate = `{
             "delete": {
                 "description": "Delete sent mails",
                 "tags": [
-                    "sent-mail"
+                    "mail"
                 ],
                 "summary": "Delete Sent Mails",
                 "parameters": [
