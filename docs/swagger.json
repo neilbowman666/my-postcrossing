@@ -5,6 +5,37 @@
     },
     "paths": {
         "/api/v1/sent-mails": {
+            "get": {
+                "description": "List sent mails",
+                "tags": [
+                    "sent-mail"
+                ],
+                "summary": "List Sent Mails",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page number, start from 1.",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_PagingPack-m_SentMailVo"
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "send mail",
                 "tags": [
@@ -22,7 +53,14 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
             }
         }
     },
@@ -185,6 +223,139 @@
                 "send_date": {
                     "type": "string",
                     "example": "2023-05-10T12:00:00Z"
+                }
+            }
+        },
+        "m.SentMailVo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "mail_type": {
+                    "$ref": "#/definitions/_const.MailType"
+                },
+                "post_fee": {
+                    "type": "number"
+                },
+                "post_fee_payment_type": {
+                    "$ref": "#/definitions/_const.PostFeePaymentType"
+                },
+                "post_region": {
+                    "$ref": "#/definitions/_const.PostRegion"
+                },
+                "recipient_address": {
+                    "type": "string"
+                },
+                "recipient_district": {
+                    "type": "string"
+                },
+                "recipient_name": {
+                    "type": "string"
+                },
+                "recipient_phone_number": {
+                    "type": "string"
+                },
+                "recipient_type": {
+                    "$ref": "#/definitions/_const.RecipientType"
+                },
+                "recipient_zip_code": {
+                    "type": "string"
+                },
+                "send_date": {
+                    "type": "string"
+                }
+            }
+        },
+        "resp.None": {
+            "type": "object",
+            "properties": {
+                "_README!!!!": {
+                    "type": "string",
+                    "example": "如果您看到这行文字，表示这里的示例 data 字段实际是 null，这里的内容是为上层封装做注释。"
+                },
+                "code": {
+                    "type": "string",
+                    "example": "0-成功，1-失败"
+                },
+                "data": {
+                    "type": "string",
+                    "example": "实际是 null"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "msg 字段显示相应错误的信息，如数据库查询失败、参数校验失败等"
+                },
+                "success": {
+                    "type": "string",
+                    "example": "成功会显示成 true，失败会被设置为 false"
+                }
+            }
+        },
+        "resp.Pack-resp_None": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "data": {
+                    "$ref": "#/definitions/resp.None"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "msg"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "resp.Pack-resp_PagingPack-m_SentMailVo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "data": {
+                    "$ref": "#/definitions/resp.PagingPack-m_SentMailVo"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "msg"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "resp.PagingPack-m_SentMailVo": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/m.SentMailVo"
+                    }
+                },
+                "page": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "page_size": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "total_pages": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "total_rows": {
+                    "type": "integer",
+                    "example": 24
                 }
             }
         }

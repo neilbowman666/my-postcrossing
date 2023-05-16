@@ -120,10 +120,123 @@ definitions:
         example: "2023-05-10T12:00:00Z"
         type: string
     type: object
+  m.SentMailVo:
+    properties:
+      id:
+        type: integer
+      mail_type:
+        $ref: '#/definitions/_const.MailType'
+      post_fee:
+        type: number
+      post_fee_payment_type:
+        $ref: '#/definitions/_const.PostFeePaymentType'
+      post_region:
+        $ref: '#/definitions/_const.PostRegion'
+      recipient_address:
+        type: string
+      recipient_district:
+        type: string
+      recipient_name:
+        type: string
+      recipient_phone_number:
+        type: string
+      recipient_type:
+        $ref: '#/definitions/_const.RecipientType'
+      recipient_zip_code:
+        type: string
+      send_date:
+        type: string
+    type: object
+  resp.None:
+    properties:
+      _README!!!!:
+        example: 如果您看到这行文字，表示这里的示例 data 字段实际是 null，这里的内容是为上层封装做注释。
+        type: string
+      code:
+        example: 0-成功，1-失败
+        type: string
+      data:
+        example: 实际是 null
+        type: string
+      msg:
+        example: msg 字段显示相应错误的信息，如数据库查询失败、参数校验失败等
+        type: string
+      success:
+        example: 成功会显示成 true，失败会被设置为 false
+        type: string
+    type: object
+  resp.Pack-resp_None:
+    properties:
+      code:
+        example: 0
+        type: integer
+      data:
+        $ref: '#/definitions/resp.None'
+      msg:
+        example: msg
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  resp.Pack-resp_PagingPack-m_SentMailVo:
+    properties:
+      code:
+        example: 0
+        type: integer
+      data:
+        $ref: '#/definitions/resp.PagingPack-m_SentMailVo'
+      msg:
+        example: msg
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  resp.PagingPack-m_SentMailVo:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/m.SentMailVo'
+        type: array
+      page:
+        example: 10
+        type: integer
+      page_size:
+        example: 1
+        type: integer
+      total_pages:
+        example: 3
+        type: integer
+      total_rows:
+        example: 24
+        type: integer
+    type: object
 info:
   contact: {}
 paths:
   /api/v1/sent-mails:
+    get:
+      description: List sent mails
+      parameters:
+      - description: page number, start from 1.
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_PagingPack-m_SentMailVo'
+      summary: List Sent Mails
+      tags:
+      - sent-mail
     post:
       description: send mail
       parameters:
@@ -133,7 +246,11 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/form.SendMailForm'
-      responses: {}
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
       summary: Send mail
       tags:
       - sent-mail
