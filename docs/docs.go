@@ -74,6 +74,32 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/v1/sent-mails/{id}": {
+            "delete": {
+                "description": "Delete sent mails",
+                "tags": [
+                    "sent-mail"
+                ],
+                "summary": "Delete Sent Mails",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "sent mail ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

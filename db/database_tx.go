@@ -49,3 +49,8 @@ func (tx Transaction[T]) Page(page int, size int, desc bool) resp.PagingPack[T] 
 		List:       dataList,
 	}
 }
+
+func (tx Transaction[T]) Delete(id uint) error {
+	var mm T
+	return DBConn.Delete(&mm, id).Error
+}

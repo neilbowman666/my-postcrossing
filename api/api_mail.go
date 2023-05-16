@@ -50,3 +50,28 @@ func ListSentMails(c *gin.Context) {
 	resp.SuccessMessageDataCode(c, "OK", resp.ParsePager(pageResult), 200)
 	return
 }
+
+// DeleteSentMails
+// @Summary Delete Sent Mails
+// @Description Delete sent mails
+// @Tags sent-mail
+// @Param id path int true "sent mail ID"
+// @Success 200 {object} resp.Pack[resp.None]
+// @Router /api/v1/sent-mails/{id} [DELETE]
+func DeleteSentMails(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		resp.Error(c, 400, "path param endpoint_id of /api/v1/sent-mails/{id} should be integer", err)
+		return
+	}
+
+	tx := db.Transaction[m.SentMail]{Tx: db.DBConn}
+	err = tx.Delete(uint(id))
+	if err != nil {
+		resp.Error(c, 500, "system error, contact administrator", err)
+		return
+	}
+	resp.SuccessMessage(c, "OK")
+	return
+}

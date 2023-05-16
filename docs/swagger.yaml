@@ -254,4 +254,21 @@ paths:
       summary: Send mail
       tags:
       - sent-mail
+  /api/v1/sent-mails/{id}:
+    delete:
+      description: Delete sent mails
+      parameters:
+      - description: sent mail ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
+      summary: Delete Sent Mails
+      tags:
+      - sent-mail
 swagger: "2.0"
