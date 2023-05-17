@@ -80,6 +80,21 @@ definitions:
     - RecipientTypePenPal
     - RecipientTypePostmarkCollecting
     - RecipientTypeOther
+  form.AddContactForm:
+    properties:
+      address:
+        type: string
+      district:
+        type: string
+      name:
+        type: string
+      phone_number:
+        type: string
+      type:
+        $ref: '#/definitions/_const.RecipientType'
+      zip_code:
+        type: string
+    type: object
   form.SendMailForm:
     properties:
       mail_type:
@@ -215,6 +230,24 @@ definitions:
 info:
   contact: {}
 paths:
+  /api/v1/contacts:
+    post:
+      description: send mail
+      parameters:
+      - description: add contact form
+        in: body
+        name: HTTP_POST_body
+        required: true
+        schema:
+          $ref: '#/definitions/form.AddContactForm'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
+      summary: Add contact
+      tags:
+      - contact
   /api/v1/sent-mails:
     get:
       description: List sent mails

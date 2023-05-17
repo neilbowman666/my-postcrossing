@@ -5,7 +5,7 @@ import "gorm.io/gorm"
 func Migrate(db *gorm.DB) {
 	models := []interface{}{
 		&SentMail{},
-		&Liaison{},
+		&Contact{},
 		&PostmarkCollection{},
 	}
 

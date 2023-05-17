@@ -16,6 +16,34 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/v1/contacts": {
+            "post": {
+                "description": "send mail",
+                "tags": [
+                    "contact"
+                ],
+                "summary": "Add contact",
+                "parameters": [
+                    {
+                        "description": "add contact form",
+                        "name": "HTTP_POST_body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.AddContactForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/sent-mails": {
             "get": {
                 "description": "List sent mails",
@@ -198,6 +226,29 @@ const docTemplate = `{
                 "RecipientTypePostmarkCollecting",
                 "RecipientTypeOther"
             ]
+        },
+        "form.AddContactForm": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "district": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/_const.RecipientType"
+                },
+                "zip_code": {
+                    "type": "string"
+                }
+            }
         },
         "form.SendMailForm": {
             "type": "object",

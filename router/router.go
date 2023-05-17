@@ -14,6 +14,8 @@ func RegisterRouter(r *gin.Engine) {
 		apiV1.GET("/sent-mails", api.ListSentMails)
 		apiV1.POST("/sent-mails", api.SendMail)
 		apiV1.DELETE("/sent-mails/:id", api.DeleteSentMails)
+
+		apiV1.POST("/contacts", api.AddContact)
 	}
 	// swagger router and BasePath
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
