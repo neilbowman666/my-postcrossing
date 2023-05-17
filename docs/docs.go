@@ -132,6 +132,122 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/postmark-collections": {
+            "get": {
+                "description": "List postmark collections",
+                "tags": [
+                    "postmark collection"
+                ],
+                "summary": "List Postmark Collections",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page number, start from 1.",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_PagingPack-m_PostmarkCollectionVo"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add postmark collection",
+                "tags": [
+                    "postmark collection"
+                ],
+                "summary": "Add Postmark Collection",
+                "parameters": [
+                    {
+                        "description": "Add postmark collection form",
+                        "name": "HTTP_POST_body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.AddPostmarkCollectionForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/postmark-collections/any/batch-deletions": {
+            "post": {
+                "description": "Delete postmark collections in batch",
+                "tags": [
+                    "postmark collection"
+                ],
+                "summary": "Delete PostmarkCollections In Batch",
+                "parameters": [
+                    {
+                        "description": "batch deletion ID list",
+                        "name": "HTTP_POST_body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/postmark-collections/{id}": {
+            "delete": {
+                "description": "Delete postmark collection",
+                "tags": [
+                    "postmark collection"
+                ],
+                "summary": "Delete Postmark Collection",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "postmark collection ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/sent-mails": {
             "get": {
                 "description": "List sent mails",
@@ -383,6 +499,59 @@ const docTemplate = `{
                 }
             }
         },
+        "form.AddPostmarkCollectionForm": {
+            "type": "object",
+            "properties": {
+                "post_office_address": {
+                    "type": "string",
+                    "example": "北京中路33号"
+                },
+                "post_office_district": {
+                    "type": "string",
+                    "example": "西藏自治区 拉萨市 城关区"
+                },
+                "post_office_name": {
+                    "type": "string",
+                    "example": "天上西藏主题邮局"
+                },
+                "post_office_phone_number": {
+                    "type": "string",
+                    "example": "0891-75660233"
+                },
+                "post_office_zip_code": {
+                    "type": "string",
+                    "example": "850030"
+                },
+                "postmark_count_daily": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "postmark_count_scenic": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "postmark_description": {
+                    "type": "string",
+                    "example": "2枚风景戳+1枚日戳"
+                },
+                "postmark_score": {
+                    "type": "integer",
+                    "example": 76
+                },
+                "when_confirmed": {
+                    "type": "string",
+                    "example": ""
+                },
+                "when_reclaimed": {
+                    "type": "string",
+                    "example": ""
+                },
+                "when_sent": {
+                    "type": "string",
+                    "example": ""
+                }
+            }
+        },
         "form.SendMailForm": {
             "type": "object",
             "properties": {
@@ -473,6 +642,50 @@ const docTemplate = `{
                     "$ref": "#/definitions/_const.RecipientType"
                 },
                 "zip_code": {
+                    "type": "string"
+                }
+            }
+        },
+        "m.PostmarkCollectionVo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "post_office_address": {
+                    "type": "string"
+                },
+                "post_office_district": {
+                    "type": "string"
+                },
+                "post_office_name": {
+                    "type": "string"
+                },
+                "post_office_phone_number": {
+                    "type": "string"
+                },
+                "post_office_zip_code": {
+                    "type": "string"
+                },
+                "postmark_count_daily": {
+                    "type": "integer"
+                },
+                "postmark_count_scenic": {
+                    "type": "integer"
+                },
+                "postmark_description": {
+                    "type": "string"
+                },
+                "postmark_score": {
+                    "type": "integer"
+                },
+                "when_confirmed": {
+                    "type": "string"
+                },
+                "when_reclaimed": {
+                    "type": "string"
+                },
+                "when_sent": {
                     "type": "string"
                 }
             }
@@ -583,6 +796,26 @@ const docTemplate = `{
                 }
             }
         },
+        "resp.Pack-resp_PagingPack-m_PostmarkCollectionVo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "data": {
+                    "$ref": "#/definitions/resp.PagingPack-m_PostmarkCollectionVo"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "msg"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
         "resp.Pack-resp_PagingPack-m_SentMailVo": {
             "type": "object",
             "properties": {
@@ -610,6 +843,33 @@ const docTemplate = `{
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/m.ContactVo"
+                    }
+                },
+                "page": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "page_size": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "total_pages": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "total_rows": {
+                    "type": "integer",
+                    "example": 24
+                }
+            }
+        },
+        "resp.PagingPack-m_PostmarkCollectionVo": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/m.PostmarkCollectionVo"
                     }
                 },
                 "page": {

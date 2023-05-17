@@ -20,6 +20,11 @@ func RegisterRouter(r *gin.Engine) {
 		apiV1.POST("/contacts", api.AddContact)
 		apiV1.DELETE("/contacts/:id", api.DeleteContact)
 		apiV1.POST("/contacts/any/batch-deletions", api.DeleteContactsInBatch)
+
+		apiV1.GET("/postmark-collections", api.ListPostmarkCollections)
+		apiV1.POST("/postmark-collections", api.AddPostmarkCollection)
+		apiV1.DELETE("/postmark-collections/:id", api.DeletePostmarkCollection)
+		apiV1.POST("/postmark-collections/any/batch-deletions", api.DeletePostmarkCollectionsInBatch)
 	}
 	// swagger router and BasePath
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

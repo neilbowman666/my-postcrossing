@@ -105,6 +105,45 @@ definitions:
         example: "610072"
         type: string
     type: object
+  form.AddPostmarkCollectionForm:
+    properties:
+      post_office_address:
+        example: 北京中路33号
+        type: string
+      post_office_district:
+        example: 西藏自治区 拉萨市 城关区
+        type: string
+      post_office_name:
+        example: 天上西藏主题邮局
+        type: string
+      post_office_phone_number:
+        example: 0891-75660233
+        type: string
+      post_office_zip_code:
+        example: "850030"
+        type: string
+      postmark_count_daily:
+        example: 1
+        type: integer
+      postmark_count_scenic:
+        example: 2
+        type: integer
+      postmark_description:
+        example: 2枚风景戳+1枚日戳
+        type: string
+      postmark_score:
+        example: 76
+        type: integer
+      when_confirmed:
+        example: ""
+        type: string
+      when_reclaimed:
+        example: ""
+        type: string
+      when_sent:
+        example: ""
+        type: string
+    type: object
   form.SendMailForm:
     properties:
       mail_type:
@@ -162,6 +201,35 @@ definitions:
       type:
         $ref: '#/definitions/_const.RecipientType'
       zip_code:
+        type: string
+    type: object
+  m.PostmarkCollectionVo:
+    properties:
+      id:
+        type: integer
+      post_office_address:
+        type: string
+      post_office_district:
+        type: string
+      post_office_name:
+        type: string
+      post_office_phone_number:
+        type: string
+      post_office_zip_code:
+        type: string
+      postmark_count_daily:
+        type: integer
+      postmark_count_scenic:
+        type: integer
+      postmark_description:
+        type: string
+      postmark_score:
+        type: integer
+      when_confirmed:
+        type: string
+      when_reclaimed:
+        type: string
+      when_sent:
         type: string
     type: object
   m.SentMailVo:
@@ -237,6 +305,20 @@ definitions:
         example: true
         type: boolean
     type: object
+  resp.Pack-resp_PagingPack-m_PostmarkCollectionVo:
+    properties:
+      code:
+        example: 0
+        type: integer
+      data:
+        $ref: '#/definitions/resp.PagingPack-m_PostmarkCollectionVo'
+      msg:
+        example: msg
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
   resp.Pack-resp_PagingPack-m_SentMailVo:
     properties:
       code:
@@ -256,6 +338,25 @@ definitions:
       list:
         items:
           $ref: '#/definitions/m.ContactVo'
+        type: array
+      page:
+        example: 10
+        type: integer
+      page_size:
+        example: 1
+        type: integer
+      total_pages:
+        example: 3
+        type: integer
+      total_rows:
+        example: 24
+        type: integer
+    type: object
+  resp.PagingPack-m_PostmarkCollectionVo:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/m.PostmarkCollectionVo'
         type: array
       page:
         example: 10
@@ -368,6 +469,82 @@ paths:
       summary: Delete Contacts In Batch
       tags:
       - contact
+  /api/v1/postmark-collections:
+    get:
+      description: List postmark collections
+      parameters:
+      - description: page number, start from 1.
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_PagingPack-m_PostmarkCollectionVo'
+      summary: List Postmark Collections
+      tags:
+      - postmark collection
+    post:
+      description: Add postmark collection
+      parameters:
+      - description: Add postmark collection form
+        in: body
+        name: HTTP_POST_body
+        required: true
+        schema:
+          $ref: '#/definitions/form.AddPostmarkCollectionForm'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
+      summary: Add Postmark Collection
+      tags:
+      - postmark collection
+  /api/v1/postmark-collections/{id}:
+    delete:
+      description: Delete postmark collection
+      parameters:
+      - description: postmark collection ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
+      summary: Delete Postmark Collection
+      tags:
+      - postmark collection
+  /api/v1/postmark-collections/any/batch-deletions:
+    post:
+      description: Delete postmark collections in batch
+      parameters:
+      - description: batch deletion ID list
+        in: body
+        name: HTTP_POST_body
+        required: true
+        schema:
+          items:
+            type: integer
+          type: array
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
+      summary: Delete PostmarkCollections In Batch
+      tags:
+      - postmark collection
   /api/v1/sent-mails:
     get:
       description: List sent mails
