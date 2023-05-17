@@ -13,10 +13,11 @@ func RegisterRouter(r *gin.Engine) {
 	{
 		apiV1.GET("/sent-mails", api.ListSentMails)
 		apiV1.POST("/sent-mails", api.SendMail)
-		apiV1.DELETE("/sent-mails/:id", api.DeleteSentMails)
+		apiV1.DELETE("/sent-mails/:id", api.DeleteSentMail)
 
 		apiV1.GET("/contacts", api.ListContacts)
 		apiV1.POST("/contacts", api.AddContact)
+		apiV1.DELETE("/contacts/:id", api.DeleteContact)
 	}
 	// swagger router and BasePath
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

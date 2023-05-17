@@ -75,6 +75,32 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/contacts/{id}": {
+            "delete": {
+                "description": "Delete contact",
+                "tags": [
+                    "mail"
+                ],
+                "summary": "Delete Contact",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "contact ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/sent-mails": {
             "get": {
                 "description": "List sent mails",
@@ -136,11 +162,11 @@ const docTemplate = `{
         },
         "/api/v1/sent-mails/{id}": {
             "delete": {
-                "description": "Delete sent mails",
+                "description": "Delete sent mail",
                 "tags": [
                     "mail"
                 ],
-                "summary": "Delete Sent Mails",
+                "summary": "Delete Sent Mail",
                 "parameters": [
                     {
                         "type": "integer",
@@ -240,7 +266,7 @@ const docTemplate = `{
         "_const.RecipientType": {
             "type": "string",
             "enum": [
-                "my self",
+                "myself",
                 "couple",
                 "relative",
                 "friend",
@@ -249,7 +275,7 @@ const docTemplate = `{
                 "other"
             ],
             "x-enum-varnames": [
-                "RecipientTypeMySelf",
+                "RecipientTypeMyself",
                 "RecipientTypeCouple",
                 "RecipientTypeRelative",
                 "RecipientTypeFriend",

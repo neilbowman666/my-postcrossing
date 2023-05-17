@@ -64,7 +64,7 @@ definitions:
     - PostRegionOverseasByAirAndSurface
   _const.RecipientType:
     enum:
-    - my self
+    - myself
     - couple
     - relative
     - friend
@@ -73,7 +73,7 @@ definitions:
     - other
     type: string
     x-enum-varnames:
-    - RecipientTypeMySelf
+    - RecipientTypeMyself
     - RecipientTypeCouple
     - RecipientTypeRelative
     - RecipientTypeFriend
@@ -326,6 +326,23 @@ paths:
       summary: Add contact
       tags:
       - contact
+  /api/v1/contacts/{id}:
+    delete:
+      description: Delete contact
+      parameters:
+      - description: contact ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
+      summary: Delete Contact
+      tags:
+      - mail
   /api/v1/sent-mails:
     get:
       description: List sent mails
@@ -367,7 +384,7 @@ paths:
       - mail
   /api/v1/sent-mails/{id}:
     delete:
-      description: Delete sent mails
+      description: Delete sent mail
       parameters:
       - description: sent mail ID
         in: path
@@ -379,7 +396,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/resp.Pack-resp_None'
-      summary: Delete Sent Mails
+      summary: Delete Sent Mail
       tags:
       - mail
 swagger: "2.0"

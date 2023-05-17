@@ -51,18 +51,18 @@ func ListSentMails(c *gin.Context) {
 	return
 }
 
-// DeleteSentMails
-// @Summary Delete Sent Mails
-// @Description Delete sent mails
+// DeleteSentMail
+// @Summary Delete Sent Mail
+// @Description Delete sent mail
 // @Tags mail
 // @Param id path int true "sent mail ID"
 // @Success 200 {object} resp.Pack[resp.None]
 // @Router /api/v1/sent-mails/{id} [DELETE]
-func DeleteSentMails(c *gin.Context) {
+func DeleteSentMail(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		resp.Error(c, 400, "path param endpoint_id of /api/v1/sent-mails/{id} should be integer", err)
+		resp.Error(c, 400, "path param `id` should be integer", err)
 		return
 	}
 

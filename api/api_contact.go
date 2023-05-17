@@ -50,3 +50,28 @@ func ListContacts(c *gin.Context) {
 	resp.SuccessMessageDataCode(c, "OK", resp.ParsePager(pageResult), 200)
 	return
 }
+
+// DeleteContact
+// @Summary Delete Contact
+// @Description Delete contact
+// @Tags mail
+// @Param id path int true "contact ID"
+// @Success 200 {object} resp.Pack[resp.None]
+// @Router /api/v1/contacts/{id} [DELETE]
+func DeleteContact(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		resp.Error(c, 400, "path param `id` should be integer", err)
+		return
+	}
+
+	tx := db.Transaction[m.Contact]{Tx: db.DBConn}
+	err = tx.Delete(uint(id))
+	if err != nil {
+		resp.Error(c, 500, "system error, contact administrator", err)
+		return
+	}
+	resp.SuccessMessage(c, "OK")
+	return
+}
