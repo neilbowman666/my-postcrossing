@@ -347,6 +347,10 @@ const docTemplate = `{
                     "type": "string",
                     "example": "CaotangLu 1 Hao"
                 },
+                "address_secret_part": {
+                    "type": "string",
+                    "example": "1 Dong 2 Danyuan 303 Hao"
+                },
                 "district": {
                     "type": "string",
                     "example": "SichuanSheng ChengduShi QingyangQu"
@@ -460,6 +464,9 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "address": {
+                    "type": "string"
+                },
+                "address_secret_part": {
                     "type": "string"
                 },
                 "district": {

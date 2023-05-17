@@ -85,6 +85,9 @@ definitions:
       address:
         example: CaotangLu 1 Hao
         type: string
+      address_secret_part:
+        example: 1 Dong 2 Danyuan 303 Hao
+        type: string
       district:
         example: SichuanSheng ChengduShi QingyangQu
         type: string
@@ -158,6 +161,8 @@ definitions:
   m.ContactVo:
     properties:
       address:
+        type: string
+      address_secret_part:
         type: string
       district:
         type: string
