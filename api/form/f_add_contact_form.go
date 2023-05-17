@@ -6,12 +6,12 @@ import (
 )
 
 type AddContactForm struct {
-	Name        string               `json:"name"`
-	ZipCode     string               `json:"zip_code"`
-	District    string               `json:"district"`
-	Address     string               `json:"address"`
-	PhoneNumber string               `json:"phone_number"`
-	Type        _const.RecipientType `json:"type"`
+	Name        string               `json:"name" example:"Leon Kennedy"`
+	ZipCode     string               `json:"zip_code" example:"100177"`
+	District    string               `json:"district" example:"ChengduShi QingyangQu"`
+	Address     string               `json:"address" example:"CaotangLu 1 Hao"`
+	PhoneNumber string               `json:"phone_number" example:"028-87009999"`
+	Type        _const.RecipientType `json:"type" example:"friend"`
 }
 
 func (f AddContactForm) ToM() *m.Contact {

@@ -219,22 +219,32 @@
             "type": "object",
             "properties": {
                 "address": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "CaotangLu 1 Hao"
                 },
                 "district": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "ChengduShi QingyangQu"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Leon Kennedy"
                 },
                 "phone_number": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "028-87009999"
                 },
                 "type": {
-                    "$ref": "#/definitions/_const.RecipientType"
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/_const.RecipientType"
+                        }
+                    ],
+                    "example": "friend"
                 },
                 "zip_code": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "100177"
                 }
             }
         },

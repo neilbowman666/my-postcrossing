@@ -83,16 +83,23 @@ definitions:
   form.AddContactForm:
     properties:
       address:
+        example: CaotangLu 1 Hao
         type: string
       district:
+        example: ChengduShi QingyangQu
         type: string
       name:
+        example: Leon Kennedy
         type: string
       phone_number:
+        example: 028-87009999
         type: string
       type:
-        $ref: '#/definitions/_const.RecipientType'
+        allOf:
+        - $ref: '#/definitions/_const.RecipientType'
+        example: friend
       zip_code:
+        example: "100177"
         type: string
     type: object
   form.SendMailForm:
