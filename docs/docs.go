@@ -17,6 +17,37 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/api/v1/contacts": {
+            "get": {
+                "description": "List contacts",
+                "tags": [
+                    "contact"
+                ],
+                "summary": "List Contacts",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page number, start from 1.",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_PagingPack-m_ContactVo"
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "send mail",
                 "tags": [
@@ -325,6 +356,32 @@ const docTemplate = `{
                 }
             }
         },
+        "m.ContactVo": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "district": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/_const.RecipientType"
+                },
+                "zip_code": {
+                    "type": "string"
+                }
+            }
+        },
         "m.SentMailVo": {
             "type": "object",
             "properties": {
@@ -411,6 +468,26 @@ const docTemplate = `{
                 }
             }
         },
+        "resp.Pack-resp_PagingPack-m_ContactVo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "data": {
+                    "$ref": "#/definitions/resp.PagingPack-m_ContactVo"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "msg"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
         "resp.Pack-resp_PagingPack-m_SentMailVo": {
             "type": "object",
             "properties": {
@@ -428,6 +505,33 @@ const docTemplate = `{
                 "success": {
                     "type": "boolean",
                     "example": true
+                }
+            }
+        },
+        "resp.PagingPack-m_ContactVo": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/m.ContactVo"
+                    }
+                },
+                "page": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "page_size": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "total_pages": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "total_rows": {
+                    "type": "integer",
+                    "example": 24
                 }
             }
         },

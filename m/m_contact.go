@@ -17,6 +17,7 @@ type Contact struct {
 
 func (_this Contact) ToVo() Visible {
 	return ContactVo{
+		ID:          _this.Model.ID,
 		Name:        _this.Name,
 		ZipCode:     _this.ZipCode,
 		District:    _this.District,
@@ -27,6 +28,7 @@ func (_this Contact) ToVo() Visible {
 }
 
 type ContactVo struct {
+	ID          uint                 `json:"id"`
 	Name        string               `json:"name"`
 	ZipCode     string               `json:"zip_code"`
 	District    string               `json:"district"`

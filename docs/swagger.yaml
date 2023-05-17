@@ -142,6 +142,23 @@ definitions:
         example: "2023-05-10T12:00:00Z"
         type: string
     type: object
+  m.ContactVo:
+    properties:
+      address:
+        type: string
+      district:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone_number:
+        type: string
+      type:
+        $ref: '#/definitions/_const.RecipientType'
+      zip_code:
+        type: string
+    type: object
   m.SentMailVo:
     properties:
       id:
@@ -201,6 +218,20 @@ definitions:
         example: true
         type: boolean
     type: object
+  resp.Pack-resp_PagingPack-m_ContactVo:
+    properties:
+      code:
+        example: 0
+        type: integer
+      data:
+        $ref: '#/definitions/resp.PagingPack-m_ContactVo'
+      msg:
+        example: msg
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
   resp.Pack-resp_PagingPack-m_SentMailVo:
     properties:
       code:
@@ -214,6 +245,25 @@ definitions:
       success:
         example: true
         type: boolean
+    type: object
+  resp.PagingPack-m_ContactVo:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/m.ContactVo'
+        type: array
+      page:
+        example: 10
+        type: integer
+      page_size:
+        example: 1
+        type: integer
+      total_pages:
+        example: 3
+        type: integer
+      total_rows:
+        example: 24
+        type: integer
     type: object
   resp.PagingPack-m_SentMailVo:
     properties:
@@ -238,6 +288,27 @@ info:
   contact: {}
 paths:
   /api/v1/contacts:
+    get:
+      description: List contacts
+      parameters:
+      - description: page number, start from 1.
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_PagingPack-m_ContactVo'
+      summary: List Contacts
+      tags:
+      - contact
     post:
       description: send mail
       parameters:
