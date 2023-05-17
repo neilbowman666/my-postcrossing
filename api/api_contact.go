@@ -54,7 +54,7 @@ func ListContacts(c *gin.Context) {
 // DeleteContact
 // @Summary Delete Contact
 // @Description Delete contact
-// @Tags mail
+// @Tags contact
 // @Param id path int true "contact ID"
 // @Success 200 {object} resp.Pack[resp.None]
 // @Router /api/v1/contacts/{id} [DELETE]

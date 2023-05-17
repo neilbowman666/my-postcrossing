@@ -342,7 +342,7 @@ paths:
             $ref: '#/definitions/resp.Pack-resp_None'
       summary: Delete Contact
       tags:
-      - mail
+      - contact
   /api/v1/sent-mails:
     get:
       description: List sent mails

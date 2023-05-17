@@ -79,7 +79,7 @@ const docTemplate = `{
             "delete": {
                 "description": "Delete contact",
                 "tags": [
-                    "mail"
+                    "contact"
                 ],
                 "summary": "Delete Contact",
                 "parameters": [
