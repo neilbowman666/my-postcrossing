@@ -37,7 +37,7 @@ const (
 type RecipientType string
 
 const (
-	RecipientTypeMySelf             RecipientType = "my self"
+	RecipientTypeMyself             RecipientType = "myself"
 	RecipientTypeCouple             RecipientType = "couple"
 	RecipientTypeRelative           RecipientType = "relative"
 	RecipientTypeFriend             RecipientType = "friend"
