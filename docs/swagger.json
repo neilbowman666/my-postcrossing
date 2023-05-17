@@ -527,16 +527,16 @@
                     "example": 76
                 },
                 "when_confirmed": {
-                    "type": "string",
-                    "example": "2023-05-17T16:04:03+0800"
+                    "type": "integer",
+                    "example": 1684310643
                 },
                 "when_reclaimed": {
-                    "type": "string",
-                    "example": "2023-05-29T18:16:45+0800"
+                    "type": "integer",
+                    "example": 1685355405
                 },
                 "when_sent": {
-                    "type": "string",
-                    "example": "2023-05-17T16:04:03+0800"
+                    "type": "integer",
+                    "example": 1684310643
                 }
             }
         },

@@ -15,36 +15,28 @@ type AddPostmarkCollectionForm struct {
 	PostOfficeZipCode     string `json:"post_office_zip_code" example:"850030"`
 	PostOfficeDistrict    string `json:"post_office_district" example:"西藏自治区 拉萨市 城关区"`
 	PostOfficeAddress     string `json:"post_office_address" example:"北京中路33号"`
-	WhenConfirmed         string `json:"when_confirmed" example:"2023-05-17T16:04:03+0800"`
-	WhenSent              string `json:"when_sent" example:"2023-05-17T16:04:03+0800"`
-	WhenReclaimed         string `json:"when_reclaimed" example:"2023-05-29T18:16:45+0800"`
+	WhenConfirmed         *int64 `json:"when_confirmed" example:"1684310643"`
+	WhenSent              *int64 `json:"when_sent" example:"1684310643"`
+	WhenReclaimed         *int64 `json:"when_reclaimed" example:"1685355405"`
 }
 
 func (f AddPostmarkCollectionForm) ToM() (*m.PostmarkCollection, error) {
 	var whenConfirmed *time.Time = nil
-	if f.WhenConfirmed != "" {
-		_whenConfirmed, err := time.Parse(time.RFC3339, f.WhenConfirmed)
-		if err != nil {
-			return nil, err
-		}
+	if f.WhenConfirmed != nil {
+		_whenConfirmed := time.Unix(*f.WhenConfirmed, 0)
 		whenConfirmed = &_whenConfirmed
 	}
 	var whenSent *time.Time = nil
-	if f.WhenSent != "" {
-		_whenSent, err := time.Parse(time.RFC3339, f.WhenSent)
-		if err != nil {
-			return nil, err
-		}
+	if f.WhenSent != nil {
+		_whenSent := time.Unix(*f.WhenSent, 0)
 		whenSent = &_whenSent
 	}
 	var whenReclaimed *time.Time = nil
-	if f.WhenReclaimed != "" {
-		_whenReclaimed, err := time.Parse(time.RFC3339, f.WhenReclaimed)
-		if err != nil {
-			return nil, err
-		}
+	if f.WhenReclaimed != nil {
+		_whenReclaimed := time.Unix(*f.WhenReclaimed, 0)
 		whenReclaimed = &_whenReclaimed
 	}
+
 	return &m.PostmarkCollection{
 		PostmarkDescription:   f.PostmarkDescription,
 		PostmarkCountScenic:   f.PostmarkCountScenic,
