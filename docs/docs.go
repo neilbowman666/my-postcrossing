@@ -293,7 +293,7 @@ const docTemplate = `{
                 },
                 "district": {
                     "type": "string",
-                    "example": "ChengduShi QingyangQu"
+                    "example": "SichuanSheng ChengduShi QingyangQu"
                 },
                 "name": {
                     "type": "string",
@@ -313,7 +313,7 @@ const docTemplate = `{
                 },
                 "zip_code": {
                     "type": "string",
-                    "example": "100177"
+                    "example": "610072"
                 }
             }
         },

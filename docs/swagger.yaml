@@ -86,7 +86,7 @@ definitions:
         example: CaotangLu 1 Hao
         type: string
       district:
-        example: ChengduShi QingyangQu
+        example: SichuanSheng ChengduShi QingyangQu
         type: string
       name:
         example: Leon Kennedy
@@ -99,7 +99,7 @@ definitions:
         - $ref: '#/definitions/_const.RecipientType'
         example: friend
       zip_code:
-        example: "100177"
+        example: "610072"
         type: string
     type: object
   form.SendMailForm:
