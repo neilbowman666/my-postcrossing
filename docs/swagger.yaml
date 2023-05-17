@@ -135,13 +135,13 @@ definitions:
         example: 76
         type: integer
       when_confirmed:
-        example: ""
+        example: 2023-05-17T16:04:03+0800
         type: string
       when_reclaimed:
-        example: ""
+        example: 2023-05-29T18:16:45+0800
         type: string
       when_sent:
-        example: ""
+        example: 2023-05-17T16:04:03+0800
         type: string
     type: object
   form.SendMailForm:

@@ -528,15 +528,15 @@
                 },
                 "when_confirmed": {
                     "type": "string",
-                    "example": ""
+                    "example": "2023-05-17T16:04:03+0800"
                 },
                 "when_reclaimed": {
                     "type": "string",
-                    "example": ""
+                    "example": "2023-05-29T18:16:45+0800"
                 },
                 "when_sent": {
                     "type": "string",
-                    "example": ""
+                    "example": "2023-05-17T16:04:03+0800"
                 }
             }
         },

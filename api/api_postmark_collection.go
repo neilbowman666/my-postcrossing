@@ -18,8 +18,11 @@ import (
 // @Router /api/v1/postmark-collections [POST]
 func AddPostmarkCollection(c *gin.Context) {
 	f := form.FillJsonForm[form.AddPostmarkCollectionForm](c)
-	postmarkCollection := f.ToM()
-	err := db.Transaction[m.PostmarkCollection]{Tx: db.DBConn}.Save(postmarkCollection)
+	postmarkCollection, err := f.ToM()
+	if err != nil {
+		resp.Error(c, 400, "param error", err)
+	}
+	err = db.Transaction[m.PostmarkCollection]{Tx: db.DBConn}.Save(postmarkCollection)
 	if err != nil {
 		resp.Error(c, 500, "db error", err)
 	} else {
