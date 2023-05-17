@@ -21,6 +21,7 @@ func AddPostmarkCollection(c *gin.Context) {
 	postmarkCollection, err := f.ToM()
 	if err != nil {
 		resp.Error(c, 400, "param error", err)
+		return
 	}
 	err = db.Transaction[m.PostmarkCollection]{Tx: db.DBConn}.Save(postmarkCollection)
 	if err != nil {
