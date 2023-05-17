@@ -102,6 +102,19 @@ definitions:
         example: "610072"
         type: string
     type: object
+  form.BatchDeletionForm:
+    properties:
+      ids:
+        example:
+        - 5
+        - 6
+        - 7
+        - 55
+        - 124
+        items:
+          type: integer
+        type: array
+    type: object
   form.SendMailForm:
     properties:
       mail_type:
@@ -343,6 +356,24 @@ paths:
       summary: Delete Contact
       tags:
       - contact
+  /api/v1/contacts/any/batch-deletions:
+    post:
+      description: Delete contacts in batch
+      parameters:
+      - description: batch deletion form
+        in: body
+        name: HTTP_POST_body
+        required: true
+        schema:
+          $ref: '#/definitions/form.BatchDeletionForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
+      summary: Delete Contacts In Batch
+      tags:
+      - contact
   /api/v1/sent-mails:
     get:
       description: List sent mails
@@ -397,6 +428,24 @@ paths:
           schema:
             $ref: '#/definitions/resp.Pack-resp_None'
       summary: Delete Sent Mail
+      tags:
+      - mail
+  /api/v1/sent-mails/any/batch-deletions:
+    post:
+      description: Delete sent mails in batch
+      parameters:
+      - description: batch deletion form
+        in: body
+        name: HTTP_POST_body
+        required: true
+        schema:
+          $ref: '#/definitions/form.BatchDeletionForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Pack-resp_None'
+      summary: Delete Sent Mails In Batch
       tags:
       - mail
 swagger: "2.0"

@@ -50,7 +50,7 @@ func (tx Transaction[T]) Page(page int, size int, desc bool) resp.PagingPack[T] 
 	}
 }
 
-func (tx Transaction[T]) Delete(id uint) error {
+func (tx Transaction[T]) Delete(ids ...uint) error {
 	var mm T
-	return DBConn.Delete(&mm, id).Error
+	return DBConn.Delete(&mm, ids).Error
 }

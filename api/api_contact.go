@@ -75,3 +75,22 @@ func DeleteContact(c *gin.Context) {
 	resp.SuccessMessage(c, "OK")
 	return
 }
+
+// DeleteContactsInBatch
+// @Summary Delete Contacts In Batch
+// @Description Delete contacts in batch
+// @Tags contact
+// @Param HTTP_POST_body body form.BatchDeletionForm true "batch deletion form"
+// @Success 200 {object} resp.Pack[resp.None]
+// @Router /api/v1/contacts/any/batch-deletions [POST]
+func DeleteContactsInBatch(c *gin.Context) {
+	f := form.FillJsonForm[form.BatchDeletionForm](c)
+	tx := db.Transaction[m.Contact]{Tx: db.DBConn}
+	err := tx.Delete(f.IDs...)
+	if err != nil {
+		resp.Error(c, 500, "system error, contact administrator", err)
+		return
+	}
+	resp.SuccessMessage(c, "OK")
+	return
+}

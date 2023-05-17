@@ -75,3 +75,22 @@ func DeleteSentMail(c *gin.Context) {
 	resp.SuccessMessage(c, "OK")
 	return
 }
+
+// DeleteSentMailsInBatch
+// @Summary Delete Sent Mails In Batch
+// @Description Delete sent mails in batch
+// @Tags mail
+// @Param HTTP_POST_body body form.BatchDeletionForm true "batch deletion form"
+// @Success 200 {object} resp.Pack[resp.None]
+// @Router /api/v1/sent-mails/any/batch-deletions [POST]
+func DeleteSentMailsInBatch(c *gin.Context) {
+	f := form.FillJsonForm[form.BatchDeletionForm](c)
+	tx := db.Transaction[m.SentMail]{Tx: db.DBConn}
+	err := tx.Delete(f.IDs...)
+	if err != nil {
+		resp.Error(c, 500, "system error, contact administrator", err)
+		return
+	}
+	resp.SuccessMessage(c, "OK")
+	return
+}

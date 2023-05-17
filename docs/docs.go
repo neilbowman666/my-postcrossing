@@ -75,6 +75,34 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/contacts/any/batch-deletions": {
+            "post": {
+                "description": "Delete contacts in batch",
+                "tags": [
+                    "contact"
+                ],
+                "summary": "Delete Contacts In Batch",
+                "parameters": [
+                    {
+                        "description": "batch deletion form",
+                        "name": "HTTP_POST_body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.BatchDeletionForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/contacts/{id}": {
             "delete": {
                 "description": "Delete contact",
@@ -153,6 +181,34 @@ const docTemplate = `{
                 "responses": {
                     "201": {
                         "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Pack-resp_None"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/sent-mails/any/batch-deletions": {
+            "post": {
+                "description": "Delete sent mails in batch",
+                "tags": [
+                    "mail"
+                ],
+                "summary": "Delete Sent Mails In Batch",
+                "parameters": [
+                    {
+                        "description": "batch deletion form",
+                        "name": "HTTP_POST_body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.BatchDeletionForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/resp.Pack-resp_None"
                         }
@@ -314,6 +370,24 @@ const docTemplate = `{
                 "zip_code": {
                     "type": "string",
                     "example": "610072"
+                }
+            }
+        },
+        "form.BatchDeletionForm": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "example": [
+                        5,
+                        6,
+                        7,
+                        55,
+                        124
+                    ]
                 }
             }
         },
