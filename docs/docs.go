@@ -84,12 +84,15 @@ const docTemplate = `{
                 "summary": "Delete Contacts In Batch",
                 "parameters": [
                     {
-                        "description": "batch deletion form",
+                        "description": "batch deletion ID list",
                         "name": "HTTP_POST_body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/form.BatchDeletionForm"
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
                         }
                     }
                 ],
@@ -197,12 +200,15 @@ const docTemplate = `{
                 "summary": "Delete Sent Mails In Batch",
                 "parameters": [
                     {
-                        "description": "batch deletion form",
+                        "description": "batch deletion ID list",
                         "name": "HTTP_POST_body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/form.BatchDeletionForm"
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
                         }
                     }
                 ],
@@ -374,24 +380,6 @@ const docTemplate = `{
                 "zip_code": {
                     "type": "string",
                     "example": "610072"
-                }
-            }
-        },
-        "form.BatchDeletionForm": {
-            "type": "object",
-            "properties": {
-                "ids": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    },
-                    "example": [
-                        5,
-                        6,
-                        7,
-                        55,
-                        124
-                    ]
                 }
             }
         },

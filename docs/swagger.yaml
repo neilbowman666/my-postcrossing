@@ -105,19 +105,6 @@ definitions:
         example: "610072"
         type: string
     type: object
-  form.BatchDeletionForm:
-    properties:
-      ids:
-        example:
-        - 5
-        - 6
-        - 7
-        - 55
-        - 124
-        items:
-          type: integer
-        type: array
-    type: object
   form.SendMailForm:
     properties:
       mail_type:
@@ -365,12 +352,14 @@ paths:
     post:
       description: Delete contacts in batch
       parameters:
-      - description: batch deletion form
+      - description: batch deletion ID list
         in: body
         name: HTTP_POST_body
         required: true
         schema:
-          $ref: '#/definitions/form.BatchDeletionForm'
+          items:
+            type: integer
+          type: array
       responses:
         "200":
           description: OK
@@ -439,12 +428,14 @@ paths:
     post:
       description: Delete sent mails in batch
       parameters:
-      - description: batch deletion form
+      - description: batch deletion ID list
         in: body
         name: HTTP_POST_body
         required: true
         schema:
-          $ref: '#/definitions/form.BatchDeletionForm'
+          items:
+            type: integer
+          type: array
       responses:
         "200":
           description: OK
